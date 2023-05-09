@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import PhotoList from "./Screens/PhotoListScreen/PhotoListScreen";
+import Gallery from "./Screens/GalleryScreen/GalleryScreen";
 import Photo from "./Screens/PhotoScreen/PhotoScreen";
 
 const MainStack = createStackNavigator();
@@ -10,10 +10,10 @@ const MainTab = createBottomTabNavigator();
 export const useRoute = isAuth => {
   if (!isAuth) {
     return (
-      <MainStack.Navigator initialRouteName="Photos">
+      <MainStack.Navigator initialRouteName="Gallery">
         <MainStack.Screen
-          name="Photos"
-          component={PhotoList}
+          name="Gallery"
+          component={Gallery}
           options={{ headerShown: false }}
         />
       </MainStack.Navigator>
@@ -31,7 +31,7 @@ export const useRoute = isAuth => {
         },
       }}
     >
-      <MainTab.Screen name="Photos" component={PhotoList} />
+      <MainTab.Screen name="Gallery" component={Gallery} />
       <MainTab.Screen name="Photo" component={Photo} />
     </MainTab.Navigator>
   );
