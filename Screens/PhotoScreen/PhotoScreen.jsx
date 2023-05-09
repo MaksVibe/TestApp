@@ -1,10 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+import { selectPhotos } from "../../redux/selectors";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
-const Photo = () => {
+const Photo = ({ route }) => {
+  const photos = useSelector(selectPhotos);
+  let image = photos.find(photo => photo.id === route.params.itemId);
+
   return (
     <View style={styles.container}>
-      <Text>Photo screen</Text>
+      {image ? (
+        <Image
+          style={{ width: "100%", height: "100%", resizeMode: "center" }}
+          source={{
+            uri: image.urls.full,
+          }}
+          overflow={"hidden"}
+        />
+      ) : (
+        <LoadingScreen />
+      )}
     </View>
   );
 };
